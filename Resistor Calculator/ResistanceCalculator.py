@@ -16,20 +16,23 @@ def voltage_divider(num, vins, vouts):
     best = float(0)
     
     for i in range(1, num+1):
-        target = vouts[i]
-        start = vins[i]
-        for a in resistors:
-            for b in resistors:
-                test = float(start)*b/(a+b)
-                testerror = abs(test-target)
-                if testerror < error:
-                    r1 = a
-                    r2 = b
-                    error = testerror
-                    best = test
-        print("Vout"+str(i)+": "+str(best)+"\tR1: "+str(r1)+"\tR2: "+str(r2))
-        error = float(10000000)
-        best = float(0)
+        if vins[i]<vouts[i]:
+            print("Invalid Vin and Vout: "+str(vins[i]) + " -> "+str(vouts[i]))
+        else:
+            target = vouts[i]
+            start = vins[i]
+            for a in resistors:
+                for b in resistors:
+                    test = float(start)*b/(a+b)
+                    testerror = abs(test-target)
+                    if testerror < error:
+                        r1 = a
+                        r2 = b
+                        error = testerror
+                        best = test
+            print("Vout"+str(i)+": "+str(best)+"\tR1: "+str(r1)+"\tR2: "+str(r2))
+            error = float(10000000)
+            best = float(0)
 
 #Same as above but uses only high resistors
 def voltage_divider_high(num, vins, vouts):
@@ -37,43 +40,50 @@ def voltage_divider_high(num, vins, vouts):
     best = float(0)
 
     for i in range(1, num+1):
-        target = vouts[i]
-        start = vins[i]
-        for a in resistorsh:
-            for b in resistorsh:
-                test = float(start)*b/(a+b)
-                testerror = abs(test-target)
-                if testerror < error:
-                    r1 = a
-                    r2 = b
-                    error = testerror
-                    best = test
-        print("Vout"+str(i)+": "+str(best)+"\tR1: "+str(r1)+"\tR2: "+str(r2))
-        error = float(10000000)
-        best = float(0)
+        if vins[i]<vouts[i]:
+            print("Invalid Vin and Vout: "+str(vins[i]) + " -> "+str(vouts[i]))
+        else:
+            target = vouts[i]
+            start = vins[i]
+            for a in resistorsh:
+                for b in resistorsh:
+                    test = float(start)*b/(a+b)
+                    testerror = abs(test-target)
+                    if testerror < error:
+                        r1 = a
+                        r2 = b
+                        error = testerror
+                        best = test
+            print("Vout"+str(i)+": "+str(best)+"\tR1: "+str(r1)+"\tR2: "+str(r2))
+            error = float(10000000)
+            best = float(0)
 
 #Function to find resistor values for a non-inverting op amp amplifier circuit
 #Only uses high resistors and may not work
 #CHECK ANSWERS IF YOU ARE USING THIS FOR THE FIRST TIME
 def op_amp_amplifier(num, vins, vouts):
+    
     error = float(1000000)
     best = float(0)
 
     for i in range(1, num+1):
-        target = vouts[i]
-        start = vins[i]
-        for a in resistorsh:
-            for b in resistorsh:
-                test = float(start)*(1+(b/a))
-                testerror = abs(test-target)
-                if testerror < error:
-                    r1 = a
-                    r2 = b
-                    error = testerror
-                    best = test
-        print("Vout"+str(i)+": "+str(best)+"\tR1: "+str(r1)+"\tR2: "+str(r2))
-        error = float(10000000)
-        best = float(0)
+        if vins[i]>vouts[i]:
+            print("Invalid Vin and Vout: "+str(vins[i]) + " -> "+str(vouts[i]))
+        else:
+            target = vouts[i]
+            start = vins[i]
+            for a in resistorsh:
+                for b in resistorsh:
+                    test = float(start)*(1+(b/a))
+                    testerror = abs(test-target)
+                    if testerror < error:
+                        r1 = a
+                        r2 = b
+                        error = testerror
+                        best = test
+            print("Vout"+str(i)+": "+str(best)+"\tR1: "+str(r1)+"\tR2: "+str(r2))
+            error = float(10000000)
+            best = float(0)
 
 
 

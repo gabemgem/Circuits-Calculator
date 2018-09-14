@@ -1,3 +1,7 @@
+from __future__ import print_function
+if hasattr(__builtins__, 'raw_input'):
+    input = raw_input
+
 #Most of the resistors available in the Circuits lab and AD Parts Kit
 resistors = [1, 6.2, 10, 47, 68, 100, 470, 1000, 1500, 2200, 4700, 6800, 10000,
 20000, 47000, 68000, 100000, 200000, 470000, 1000000, 10000000, 2.2, 2.7, 3.3,
@@ -88,16 +92,16 @@ def op_amp_amplifier(num, vins, vouts):
 
 
 
-option = raw_input("What do you want to calculate?\n"
+option = input("What do you want to calculate?\n"
                    "VD(voltage divider), VDH(voltage divider high),"
                    "OAA(op amp amplifier)\n").upper()
-num = input("How many do you want to do? ")
+num = int(input("How many do you want to do? "))
 
 vins = [0]
 vouts = [0]
 for i in range(1,num+1):
-    vins.append(input("Vin" + str(i) + " "))
-    vouts.append(input("Vout"+ str(i) + " "))
+    vins.append(int(input("Vin" + str(i) + " ")))
+    vouts.append(int(input("Vout"+ str(i) + " ")))
 
 
 if option == "VD":
@@ -110,6 +114,6 @@ elif option == "OAA":
     op_amp_amplifier(num, vins, vouts)
 
 #wait until user presses a button to quit program    
-raw_input()
+input()
 
 
